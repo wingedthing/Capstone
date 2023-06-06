@@ -1,0 +1,92 @@
+{
+    "initialize.py": {
+        "runtime": 0,
+        "use_testbed": false,
+        "test_old": false,
+        "old_data": {
+            "type": "json",
+            "client_id": "old_data_handler",
+            "topic_pub": "Data/raw",
+            "path": "test.log",
+            "hz": 25
+        },
+        "should_log_output": false,
+        "log_data": {
+            "client_id": "data_log_handler",
+            "topic_sub": "Data/location",
+            "log_path": "test_output.log"
+        }
+    },
+    "logger_process.py": {
+        "config": {
+            "version": 1,
+            "formatters": {
+                "detailed": {
+                    "class": "logging.Formatter",
+                    "format": "%(asctime)s %(levelname)-8s %(processName)-20s %(message)s"
+                }
+            },
+            "handlers": {
+                "console": {
+                    "class": "logging.StreamHandler",
+                    "level": "INFO",
+                    "formatter": "detailed"
+                },
+                "file": {
+                    "class": "logging.FileHandler",
+                    "filename": "app_log.log",
+                    "mode": "w",
+                    "formatter": "detailed"
+                }
+            },
+            "root": {
+                "level": "DEBUG",
+                "handlers": ["console", "file"]
+            }
+        }
+    },
+    "linear_to_location_msg_handler.py": {
+        "client_id": "linear_loc_handler",
+        "topic_sub": "Data/linear",
+        "topic_pub": "Data/location",
+        "testbed_axle_length": 148.0,
+        "chair_axle_length": 549.0,
+        "filter_version": 0
+    },
+    "raw_to_linear_msg_handler.py": {
+        "client_id": "raw_linear_handler",
+        "topic_sub": "Data/raw",
+        "topic_pub": "Data/linear",
+        "testbed_wheel_diameter": 58.0,
+        "chair_wheel_diameter": 609.6,
+        "filter_version": 0
+    },
+    "sensor_to_raw_msg_handler.py": {
+        "client_id": "sensor_raw_handler",
+        "topic_sub": "Debug/info",
+        "topic_pub": "Data/raw",
+        "testbed_l_mac": "D2:25:5D:F8:2C:F3",
+        "testbed_r_mac": "DE:C8:99:45:BC:03",
+        "chair_l_mac": "D8:21:CC:AE:36:BE",
+        "chair_r_mac": "EB:D1:24:E9:26:F2"
+    },
+    "visualization_PyQt.py": {
+        "client_id": "gui",
+        "topic_sub": "Data/location",
+        "topic_pub": "Debug/info",
+        "broker_host": "10.53.250.5",
+        "port": 1883,
+        "map_path": "app/Visualization/Assets/map_01.png",
+        "graph_title": "CS.23.322 - Real Time Indoor Wheel Based Asset Localization System",
+        "gui_title": "Plotter",
+        "min_x": -800,
+        "max_x": 800,
+        "min_y": -400,
+        "max_y": 400,
+        "queue_length": 100,
+        "sample_data_mod": 5,
+        "draw_line_frequency": 200,
+        "show_line": true,
+        "show_marker": true
+    }
+}
